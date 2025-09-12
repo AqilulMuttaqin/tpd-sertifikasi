@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('arsips', function (Blueprint $table) {
+        Schema::create('tb_arsip', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('no_surat');
+            $table->string('judul_surat');
+            $table->foreignId('kategori_id')
+                ->constrained('tb_kategori')
+                ->onDelete('cascade');
+            $table->timestamp('waktu_upload');
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('arsips');
+        Schema::dropIfExists('tb_arsip');
     }
 };
