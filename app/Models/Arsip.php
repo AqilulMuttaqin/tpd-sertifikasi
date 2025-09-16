@@ -11,9 +11,12 @@ class Arsip extends Model
     protected $fillable = [
         'no_surat',
         'judul_surat',
+        'file_surat',
         'kategori_id',
         'waktu_upload',
     ];
+
+    public $timestamps = false;
 
     public function kategori()
     {

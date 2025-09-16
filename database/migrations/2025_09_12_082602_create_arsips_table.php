@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_surat');
             $table->string('judul_surat');
+            $table->string('file_surat');
             $table->foreignId('kategori_id')
                 ->constrained('tb_kategori')
                 ->onDelete('cascade');
