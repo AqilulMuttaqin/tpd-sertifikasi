@@ -3,6 +3,7 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium">
+            {{-- Arsip --}}
             <li>
                 <a href="{{ route('arsip.index') }}"
                     class="flex items-center p-2 rounded-lg group
@@ -17,6 +18,7 @@
                     <span class="ms-3">Arsip</span>
                 </a>
             </li>
+            {{-- Kategori --}}
             <li>
                 <a href="{{ route('kategori.index') }}"
                     class="flex items-center p-2 rounded-lg group
@@ -29,10 +31,10 @@
                             d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-6 8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
                             clip-rule="evenodd" />
                     </svg>
-
                     <span class="flex-1 ms-3 whitespace-nowrap">Kategori Surat</span>
                 </a>
             </li>
+            {{-- About --}}
             <li>
                 <a href="{{ route('about') }}"
                     class="flex items-center p-2 rounded-lg group
@@ -45,7 +47,6 @@
                             d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
                             clip-rule="evenodd" />
                     </svg>
-
                     <span class="flex-1 ms-3 whitespace-nowrap">About</span>
                 </a>
             </li>

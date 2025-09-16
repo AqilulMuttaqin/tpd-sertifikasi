@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Breadcrumb --}}
     <nav class="flex mt-14 mb-3" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
@@ -17,12 +18,13 @@
             </li>
         </ol>
     </nav>
+
+    {{-- Main Content --}}
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
         <h2 class="text-lg font-semibold">About</h2>
         <div class="flex items-start gap-6 mt-2">
             <img src="{{ asset('assets/images/2141720182.jpg') }}" alt="Foto Profil"
                 class="w-32 h-40 rounded-lg object-cover object-top border">
-
             <div class="space-y-2">
                 <h3 class="text-lg font-semibold text-gray-800">Aplikasi ini dibuat oleh:</h3>
                 <div class="grid grid-cols-6 max-w-md gap-2 text-sm text-gray-600">
@@ -43,7 +45,6 @@
                     <div class="col-span-4">16 September 2025</div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

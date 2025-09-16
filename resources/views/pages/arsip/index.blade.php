@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Breadcrumb --}}
     <nav class="flex mt-14 mb-3" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
@@ -17,10 +18,14 @@
             </li>
         </ol>
     </nav>
+
+    {{-- Main Content --}}
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
         <h2 class="text-lg font-semibold">Arsip Surat</h2>
         <p class="mt-2 text-sm text-gray-600">Berikut ini adalah surat-surat yang telah terbit dan diarsipkan. Klik "Lihat"
             pada kolom aksi untuk menampilkan surat</p>
+
+        {{-- Notifikasi --}}
         @if (session('success'))
             <div id="alert-success" class="my-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg border border-green-300"
                 role="alert">
@@ -38,6 +43,8 @@
                 }, 3000);
             </script>
         @endif
+
+        {{-- Tabel Arsip --}}
         <form action="{{ route('arsip.index') }}" method="GET" class="flex items-center max-w-lg mt-6">
             <label for="search" class="block text-sm font-medium text-gray-900 me-3 text-nowrap">Cari Surat:</label>
             <div class="relative w-full">
@@ -134,7 +141,7 @@
 
     </div>
 
-    {{-- Script untuk konfirmasi hapus dan notifikasi --}}
+    {{-- Script konfirmasi hapus --}}
     <script>
         function confirmDelete(id) {
             Swal.fire({
@@ -153,16 +160,4 @@
             })
         }
     </script>
-
-    {{-- PENAMBAHAN KODE UNTUK MENAMPILKAN ALERT SUKSES --}}
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
 @endsection

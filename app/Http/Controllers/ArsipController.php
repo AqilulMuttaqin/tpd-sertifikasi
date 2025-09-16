@@ -11,12 +11,15 @@ class ArsipController extends Controller
 {
     public function index(Request $request)
     {
+        // ambil data arsip dengan relasi kategori
         $query = Arsip::with('kategori');
 
+        // pencarian
         if ($request->has('search') && $request->search != '') {
             $query->where('judul_surat', 'like', '%' . $request->search . '%');
         }
 
+        // urutkan berdasarkan id terbaru
         $arsip = $query->orderBy('id', 'desc')->get();
 
         return view('pages.arsip.index', ['arsip' => $arsip]);
@@ -24,6 +27,7 @@ class ArsipController extends Controller
 
     public function create()
     {
+        // ambil data kategori
         $kategori = Kategori::get();
 
         return view(
@@ -36,6 +40,7 @@ class ArsipController extends Controller
 
     public function store(Request $request)
     {
+        // validasi input
         $validate = $request->validate([
             'no_surat' => 'required|string|max:255|unique:tb_arsip,no_surat',
             'judul_surat' => 'required|string|max:255',
@@ -45,9 +50,11 @@ class ArsipController extends Controller
             'no_surat.unique' => 'Nomor surat sudah ada, silakan gunakan yang lain.',
         ]);
 
+        // cek file terkirim
         $filename = str_replace(['/', ' '], '-', $request->no_surat) . '.pdf';
         $request->file('file_surat')->storeAs('arsip', $filename, 'public');
 
+        // simpan data arsip
         Arsip::create([
             'no_surat' => $request->no_surat,
             'judul_surat' => $request->judul_surat,
@@ -66,11 +73,12 @@ class ArsipController extends Controller
 
     public function updateFile(Request $request, Arsip $arsip)
     {
+        // validasi input
         $request->validate([
             'file_surat' => 'required|mimes:pdf',
         ]);
 
-        // cek apakah file terkirim
+        // cek file terkirim
         if (!$request->hasFile('file_surat')) {
             return back()->withErrors(['file_surat' => 'File tidak terkirim.']);
         }
@@ -83,7 +91,6 @@ class ArsipController extends Controller
         // simpan file baru
         $filename = str_replace(['/', ' '], '-', $arsip->no_surat) . '.pdf';
         $request->file('file_surat')->storeAs('arsip', $filename, 'public');
-
         $arsip->update([
             'file_surat' => $filename,
         ]);
@@ -93,12 +100,15 @@ class ArsipController extends Controller
 
     public function download(Arsip $arsip)
     {
+        // ambil path file
         $filePath = 'arsip/' . $arsip->file_surat;
 
+        // cek file ada
         if (!Storage::disk('public')->exists($filePath)) {
             return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
 
+        // download file
         return Storage::disk('public')->download($filePath, $arsip->file_surat);
     }
 

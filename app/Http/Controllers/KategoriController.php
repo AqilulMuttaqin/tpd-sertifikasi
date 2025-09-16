@@ -9,12 +9,15 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
+        // ambil data kategori
         $query = Kategori::query();
 
+        // pencarian
         if ($request->has('search') && $request->search != '') {
             $query->where('nama_kategori', 'like', '%' . $request->search . '%');
         }
 
+        // urutkan berdasarkan id terkecil
         $kategori = $query->orderBy('id', 'asc')->get();
         
         return view('pages.kategori.index', ['kategori' => $kategori]);
@@ -27,6 +30,7 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
+        // validasi input
         $validate = $request->validate([
             'nama_kategori' => 'required|string|max:255|unique:tb_kategori,nama_kategori',
             'keterangan' => 'required|string|max:500',
@@ -34,6 +38,7 @@ class KategoriController extends Controller
             'nama_kategori.unique' => 'Nama kategori sudah ada, silakan gunakan yang lain.',
         ]);
 
+        // simpan data kategori
         Kategori::create([
             'nama_kategori' => $request->nama_kategori,
             'keterangan' => $request->keterangan,
@@ -49,6 +54,7 @@ class KategoriController extends Controller
 
     public function update(Request $request, Kategori $kategori)
     {
+        // validasi input
         $validate = $request->validate([
             'nama_kategori' => 'required|string|max:255|unique:tb_kategori,nama_kategori,' . $kategori->id,
             'keterangan' => 'required|string|max:500',
@@ -56,6 +62,7 @@ class KategoriController extends Controller
             'nama_kategori.unique' => 'Nama kategori sudah ada, silakan gunakan yang lain.',
         ]);
 
+        // update data kategori
         $kategori->update([
             'nama_kategori' => $request->nama_kategori,
             'keterangan' => $request->keterangan,
@@ -66,10 +73,12 @@ class KategoriController extends Controller
 
     public function destroy(Kategori $kategori)
     {
+        // cek apakah kategori memiliki arsip terkait
         if ($kategori->arsip()->count() > 0) {
             return redirect()->route('kategori.index')->with('error', 'Kategori tidak dapat dihapus karena masih memiliki arsip terkait.');
         }
 
+        // hapus kategori
         $kategori->delete();
 
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');

@@ -8,6 +8,7 @@ Route::get('/', function () {
     return redirect()->route('arsip.index');
 });
 
+// Arsip Routes
 Route::get('/arsip', [ArsipController::class, 'index'])->name('arsip.index');
 Route::get('/arsip/create', [ArsipController::class, 'create'])->name('arsip.create');
 Route::post('/arsip', [ArsipController::class, 'store'])->name('arsip.store');
@@ -16,6 +17,8 @@ Route::get('/arsip/{arsip}/download', [ArsipController::class, 'download'])->nam
 Route::put('/arsip/{arsip}/update-file', [ArsipController::class, 'updateFile'])->name('arsip.updateFile');
 Route::delete('/arsip/{arsip}', [ArsipController::class, 'destroy'])->name('arsip.destroy');
 
+
+// Kategori Routes
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
@@ -23,4 +26,5 @@ Route::get('/kategori/{kategori}', [KategoriController::class, 'show'])->name('k
 Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
 Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
+// About Route
 Route::view('/about', 'pages.about')->name('about');

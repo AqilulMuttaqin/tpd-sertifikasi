@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Breadcrumb --}}
     <nav class="flex mt-14 mb-3" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
@@ -29,10 +30,13 @@
             </li>
         </ol>
     </nav>
+
+    {{-- Main Content --}}
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
         <h2 class="text-lg font-semibold">Tambah Kategori Surat</h2>
         <p class="mt-2 text-sm text-gray-600">Tambahkan data kategori surat. Jika sudah selesai, klik tombol "Simpan".</p>
-        
+
+        {{-- Notifikasi --}}
         @if ($errors->any())
             <div id="alert-error" class="my-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300"
                 role="alert">
@@ -54,6 +58,7 @@
                 }, 5000);
             </script>
         @endif
+
         <form class="space-y-4" action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -90,5 +95,4 @@
             </div>
         </form>
     </div>
-
 @endsection

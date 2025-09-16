@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Breadcrumb --}}
     <nav class="flex mt-14 mb-3" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
-                <a href="{{ route('arsip.index') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                <a href="{{ route('arsip.index') }}"
+                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -21,11 +23,14 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 9 4-4-4-4" />
                     </svg>
-                    <a href="{{ route('arsip.show', $arsip) }}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2">Lihat Arsip</a>
+                    <a href="{{ route('arsip.show', $arsip) }}"
+                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2">Lihat Arsip</a>
                 </div>
             </li>
         </ol>
     </nav>
+
+    {{-- Main Content --}}
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
         <h2 class="text-lg font-semibold">Lihat Arsip Surat</h2>
         <div class="mt-4">
@@ -38,6 +43,7 @@
             </ul>
         </div>
 
+        {{-- Preview Surat --}}
         <div class="mt-6">
             <h3 class="text-md font-semibold mb-2">Preview Surat:</h3>
             <iframe src="{{ asset('storage/arsip/' . $arsip->file_surat) }}?v={{ time() }}"
@@ -45,6 +51,7 @@
             </iframe>
         </div>
 
+        {{-- Form Ganti File Surat --}}
         <div class="mt-4 max-w-md">
             <form action="{{ route('arsip.updateFile', $arsip) }}" method="POST" enctype="multipart/form-data"
                 class="flex items-center gap-3">

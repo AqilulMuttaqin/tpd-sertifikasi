@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Breadcrumb --}}
     <nav class="flex mt-14 mb-3" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
@@ -29,6 +30,8 @@
             </li>
         </ol>
     </nav>
+
+    {{-- Main Content --}}
     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
         <h2 class="text-lg font-semibold">Unggah Surat</h2>
         <p class="mt-2 text-sm text-gray-600">Unggah surat yang telah terbit pada form ini untuk diarsipkan.</p>
@@ -39,6 +42,7 @@
             </ul>
         </div>
         
+        {{-- Notifikasi --}}
         @if ($errors->any())
             <div id="alert-error" class="my-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300"
                 role="alert">
@@ -60,6 +64,7 @@
                 }, 5000);
             </script>
         @endif
+
         <form class="space-y-4" action="{{ route('arsip.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -136,6 +141,7 @@
         </form>
     </div>
 
+    {{-- Script Drag and Drop --}}
     <script>
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file_surat');
@@ -157,7 +163,7 @@
             dropArea.classList.remove('bg-blue-50', 'border-blue-400');
             const file = e.dataTransfer.files[0];
             if (file && file.type === "application/pdf") {
-                fileInput.files = e.dataTransfer.files; // set file ke input hidden
+                fileInput.files = e.dataTransfer.files;
                 fileNameDisplay.textContent = 'File terpilih: ' + file.name;
             } else {
                 fileNameDisplay.textContent = 'Hanya file PDF yang diperbolehkan.';
