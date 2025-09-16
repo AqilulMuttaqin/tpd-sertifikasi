@@ -22,3 +22,5 @@ Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.s
 Route::get('/kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
 Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+Route::view('/about', 'pages.about')->name('about');

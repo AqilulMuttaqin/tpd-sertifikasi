@@ -34,8 +34,11 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                    <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                <a href="{{ route('about') }}"
+                    class="flex items-center p-2 rounded-lg group
+                   {{ request()->routeIs('about') ? 'bg-gray-100 text-blue-600' : 'text-gray-900 hover:bg-gray-100' }}">
+                    <svg class="shrink-0 w-5 h-5 transition duration-75 
+                                {{ request()->routeIs('about') ? 'text-blue-600' : 'text-gray-500 group-hover:text-gray-900' }}"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
