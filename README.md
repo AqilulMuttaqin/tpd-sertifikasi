@@ -51,8 +51,8 @@ Proyek ini digunakan untuk menyimpan, mengelola, dan mencari surat yang diarsipk
 
 1. Clone repository ini:
    ```bash
-   git clone https://github.com/username/arsip-surat.git
-   cd arsip-surat
+   git clone https://github.com/AqilulMuttaqin/tpd-sertifikasi.git
+   cd tpd-sertifikasi
 
 2. Install dependencies Laravel:
    ```bash
