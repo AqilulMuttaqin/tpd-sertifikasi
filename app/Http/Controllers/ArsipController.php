@@ -104,12 +104,12 @@ class ArsipController extends Controller
 
     public function destroy(Arsip $arsip)
     {
-        // Hapus file kalau ada
+        // hapus file dari storage
         if ($arsip->file_surat && Storage::disk('public')->exists('arsip/' . $arsip->file_surat)) {
             Storage::disk('public')->delete('arsip/' . $arsip->file_surat);
         }
 
-        // Hapus data arsip dari database
+        // hapus data arsip dari database
         $arsip->delete();
 
         return redirect()->route('arsip.index')->with('success', 'Arsip berhasil dihapus.');

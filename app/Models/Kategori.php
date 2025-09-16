@@ -13,6 +13,8 @@ class Kategori extends Model
         'keterangan',
     ];
 
+    public $timestamps = false;
+
     public function arsip()
     {
         return $this->hasMany(Arsip::class, 'kategori_id');
